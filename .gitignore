@@ -1,3 +1,7 @@
 .idea
 target
 *.iml
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
