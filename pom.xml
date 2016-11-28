@@ -20,6 +20,7 @@
         <slf4jVersion>1.7.7</slf4jVersion>
         <hadoop.version>2.7.1</hadoop.version>
         <junit.version>3.8.1</junit.version>
+        <scalatest.version>2.2.0</scalatest.version>
         <PermGen>64m</PermGen>
         <MaxPermGen>512m</MaxPermGen>
         <CodeCacheSize>512m</CodeCacheSize>
@@ -181,8 +182,14 @@
             <scope>provided</scope>
         </dependency>
         <!-- end spark -->
-
-
+        <!-- scalatest -->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.binary.version}</artifactId>
+            <version>${scalatest.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- end scalatest-->
 
     </dependencies>
 
