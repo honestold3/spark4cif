@@ -1,5 +1,6 @@
 package com.finupgroup.cif.demo
 
+import com.finupgroup.cif.spark.WorldCount
 import com.finupgroup.cif.tools.LocalSparkContext
 import org.apache.spark.sql.{Row, SQLContext}
 import org.scalatest.FunSuite
@@ -21,10 +22,17 @@ class SparkWCSuit extends FunSuite
 
   //df wordCount
   test("test df wc") {
+    val head +: tail = List(1,2,3)
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
     val df = sc.makeRDD(Seq("a", "b", "b")).toDF("word")
     val res = df.groupBy("word").count().collect()
     assert(res === Array(Row("a",1),Row("b",2)))
+  }
+
+  test("test WorldCount"){
+    val list = List("hello world","hi hello","hello world")
+    val result = WorldCount.counts(sc,list)
+    assert(result.length == 3)
   }
 }

@@ -12,4 +12,14 @@ object SparkStreamingDemo {
 
   }
 
+  def restr(s: String) = {
+    val len = s.length
+    val ac = s.toCharArray
+    val out = for {
+      i <- Range(len,0,-1)
+      //node = ac(i-1)
+    } yield ac(i-1)
+    out.mkString
+  }
+
 }
