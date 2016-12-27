@@ -22,7 +22,7 @@ class JsonParser extends JavaTokenParsers{
 
   def jsonArray: Parser[List[Any]] = "[" ~> rep(term <~ ",?".r) <~ "]" ^^ (l => l)
 
-  //String也会被隐式转化为Parser的形式
+  //String也会被隐式转化为Parser 的形式
   def jsonObject: Parser[Map[String, Any]] =
     "{" ~> rep((ident ~ ":" ~ jNum |ident ~ ":" ~ jBool | ident ~ ":" ~ jNull | ident ~ ":" ~ jsonObject | ident ~ ":" ~ jsonArray | ident ~ ":" ~ jStr) <~ ",?".r) <~ "}" ^^ {
     os =>
