@@ -21,6 +21,8 @@
         <hadoop.version>2.7.1</hadoop.version>
         <junit.version>3.8.1</junit.version>
         <scalatest.version>2.2.0</scalatest.version>
+        <elasticsearch.spark.version>2.4.3</elasticsearch.spark.version>
+        <es.version>2.4.3</es.version>
         <PermGen>64m</PermGen>
         <MaxPermGen>512m</MaxPermGen>
         <CodeCacheSize>512m</CodeCacheSize>
@@ -70,15 +72,15 @@
             <artifactId>scalap</artifactId>
             <version>${scala.version}</version>
         </dependency>
-        <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-hdfs</artifactId>
-        <version>${hadoop.version}</version>
-        <scope>provided</scope>
-        </dependency>
         <!-- end scala-->
 
         <!-- start hadoop -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
@@ -182,7 +184,7 @@
             <scope>provided</scope>
         </dependency>
         <!-- end spark -->
-        <!-- scalatest -->
+        <!-- start scalatest -->
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.binary.version}</artifactId>
@@ -190,6 +192,25 @@
             <scope>provided</scope>
         </dependency>
         <!-- end scalatest-->
+
+        <!--start elasticsearch-->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-spark_${scala.binary.version}</artifactId>
+            <version>${elasticsearch.spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.spark</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${es.version}</version>
+        </dependency>
+        <!--end elasticsearch-->
 
     </dependencies>
 

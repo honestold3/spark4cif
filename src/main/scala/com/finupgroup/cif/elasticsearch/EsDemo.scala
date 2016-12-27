@@ -17,12 +17,12 @@ object EsDemo {
       .set("es.nodes","honest")
       .set("es.port","9200")
       .setMaster("spark://honest:7077")
-      .setAppName("es_hdfs")
+      .setAppName("es_spark")
 
     val sc = new SparkContext(conf)
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
-    //查询合作方为abc的数据
+    //查询为abc的数据
     val query = """{"query":{"match":{"activity.partnerCode": "abc"}}}"""
 
     //将在es中的查询结果转化为rdd/dataFrame
