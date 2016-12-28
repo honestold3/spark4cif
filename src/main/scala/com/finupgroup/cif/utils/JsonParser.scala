@@ -7,7 +7,8 @@ import scala.util.parsing.combinator.JavaTokenParsers
  */
 class JsonParser extends JavaTokenParsers{
 
-  //哈哈是来自JavaTokenParser的floatingPointNumber parser
+
+  //是来自JavaTokenParser的floatingPointNumber parser
   def jNum: Parser[Double] = floatingPointNumber ^^ (_.toDouble)
 
   //stringLiteral 也来自JavaTokenParser 这边解析出来的结果会是例如"string"的形式 我们需要把双引号给去掉
