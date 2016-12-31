@@ -27,8 +27,10 @@ object EsDemo {
 
     //将在es中的查询结果转化为rdd/dataFrame
     val esRdd = sc.esRDD(s"index/type",query)
+    //esRdd.map(xx _ ).saveToEs("index/ss")
     //直接读入全部数据
     val esDf = sqlContext.esDF(s"index/type")
+
   }
 
 }
