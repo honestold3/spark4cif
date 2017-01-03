@@ -48,6 +48,18 @@
             <id>Sonatype Releases</id>
             <url>https://oss.sonatype.org/content/repositories/releases/</url>
         </repository>
+        <repository>
+            <id>puhuifinance</id>
+            <name>Maven of Puhuifinance.com</name>
+            <url>http://inside.puhuifinance.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -211,6 +223,14 @@
             <version>${es.version}</version>
         </dependency>
         <!--end elasticsearch-->
+
+        <!-- start finupgroup-->
+        <dependency>
+            <groupId>com.puhui</groupId>
+            <artifactId>puhui-aes</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!-- end finupgroup-->
 
     </dependencies>
 
