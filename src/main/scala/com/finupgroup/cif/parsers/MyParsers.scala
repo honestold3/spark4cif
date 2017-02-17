@@ -18,12 +18,14 @@ object MyParsers extends App with JavaTokenParsers{
   def expr0 = opt(factor)
 
   def expr1 = "(" ~ factor ~ ")" ^^ {
-    case (a ~ b ~ d) => d
+    case (a ~ b ~ d) => b
   }
 
   def expr2 = rep(factor <~ ",?".r)
 
   def expr3 = repsep(factor,",")
+
+  def kkkk = factor ^^^ (println("fff"))
 
 
   val str = """ "asd665" """
@@ -34,18 +36,24 @@ object MyParsers extends App with JavaTokenParsers{
 
   val str3 = "1,2,3"
 
+  val str4 = "1234"
+
+
   val result = parseAll(Num,str2)
   println(result)
 
-  val kankan = parseAll(expr1,str1)
+  val kankan = parseAll(expr,str1)
 
   println(s"kankan: $kankan")
 
-  val kk = parseAll(expr3,str3)
+  val kk = parseAll(expr2,str3)
 
-  println(kk)
+  println("kk::::"+kk)
 
-  val kkk = parseAll(expr0,str2)
+  val kkk = parseAll(expr0,str4)
   println(kkk)
+
+  val kankan1 = parseAll(kkkk,"1111")
+  println(kankan1)
 
 }

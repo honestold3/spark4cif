@@ -23,6 +23,7 @@
         <scalatest.version>2.2.0</scalatest.version>
         <elasticsearch.spark.version>2.4.3</elasticsearch.spark.version>
         <es.version>2.4.3</es.version>
+        <jol.version>0.6</jol.version>
         <PermGen>64m</PermGen>
         <MaxPermGen>512m</MaxPermGen>
         <CodeCacheSize>512m</CodeCacheSize>
@@ -232,6 +233,13 @@
         </dependency>
         <!-- end finupgroup-->
 
+        <!-- start jol -->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>${jol.version}</version>
+        </dependency>
+        <!-- end jol-->
     </dependencies>
 
     <build>

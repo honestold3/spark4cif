@@ -11,7 +11,9 @@ object Sentencer extends StandardTokenParsers {
 
   def main(args: Array[String]): Unit = {
 
-    println(phrase(sentence)(new lexical.Scanner("(111)")))
+    val str = "(123)"
+
+    println(phrase(sentence)(new lexical.Scanner("""("111")""")))
 
   }
 

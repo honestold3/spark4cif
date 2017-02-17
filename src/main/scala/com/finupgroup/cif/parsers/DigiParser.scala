@@ -15,7 +15,9 @@ object DigiParser extends RegexParsers{
     //import DigiParser.{Success,Failure,Error}
 
     res match {
-      case Success(r,n) => println(r)
+      case Success(r,n) => r match {
+        case x => if(x.isInstanceOf[Int]) println("llll");println(x)
+      }
       case Failure(msg,n) => println(n.source)
       case Error(msg,n) => println(msg)
     }
