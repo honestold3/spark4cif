@@ -10,7 +10,7 @@ object DigiParser extends RegexParsers{
   def digis = "\\d+".r ^^ (_.toInt)
 
   def main(args: Array[String]): Unit = {
-    val res = DigiParser.parseAll(DigiParser.digis,"333w")
+    val res = DigiParser.parseAll(DigiParser.digis,"333")
 
     //import DigiParser.{Success,Failure,Error}
 

@@ -13,7 +13,7 @@ object Sentencer extends StandardTokenParsers {
 
     val str = "(123)"
 
-    println(phrase(sentence)(new lexical.Scanner("""("111")""")))
+    println(phrase(sentence)(new lexical.Scanner(""" ("111") """)))
 
   }
 

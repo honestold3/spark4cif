@@ -39,7 +39,7 @@ object ArithmeticParsers1 extends StandardTokenParsers {
   def factor: Parser[Int] = "(" ~> expr <~ ")" | numericLit ^^ (_.toInt)
 
   def main(args: Array[String]) {
-    val str = "(2+10-(2*3))"
+    val str = "(2+10)"
     val tokens = new lexical.Scanner(str)
     println(str)
     println(phrase(expr)(tokens))
@@ -73,12 +73,13 @@ object ArithmeticParsers2 extends StandardTokenParsers {
   }
 
   def main(args: Array[String]) {
-    val str = "(1+2)+(3*2)"
+    val str = "(1+2)+(2*3+7)"
     val parse = phrase(expr)
     val tokens = new lexical.Scanner(str)
     println(str)
-    println(parse(tokens))
+    //println(parse(tokens))
     val kankan = parse(tokens).get
+    println(kankan)
     println(arithmetic(kankan))
   }
 }

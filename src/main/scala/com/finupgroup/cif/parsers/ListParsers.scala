@@ -28,6 +28,10 @@ object ListParsers1 extends StandardTokenParsers {
 
   def exprs: Parser[List[Any]] = expr ~ rep ("," ~> expr) ^^ { case x ~ y => x :: y }
 
+  def kankan: Any ~ List[Any] => List[Any] = {
+    case x ~ y => x :: y
+  }
+
   def main(args: Array[String]) {
     val str = "(111,ccc,eeee,(qq,tt))"
     val tokens = new lexical.Scanner(str)

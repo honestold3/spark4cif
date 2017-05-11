@@ -2,6 +2,7 @@ package com.finupgroup.cif.sql
 
 import java.util.Date
 
+import com.finupgroup.cif.sql.MetaData.{Row, Table}
 import org.joda.time.DateTime
 
 /**

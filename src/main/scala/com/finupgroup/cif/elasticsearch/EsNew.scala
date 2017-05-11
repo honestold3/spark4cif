@@ -18,15 +18,15 @@ object EsNew {
 
     val sc = new SparkContext(conf)
 
-    sc.objectFile[scala.collection.immutable.HashMap[String,String]]("/es").foreach{x=>
-      println(x)
-      println(x.getOrElse("biz","wwwww"))
-      println(x.isInstanceOf[Map[String,String]])
-      println("###############")
-    }
+//    sc.objectFile[scala.collection.immutable.HashMap[String,String]]("/es").foreach{x=>
+//      println(x)
+//      println(x.getOrElse("biz","wwwww"))
+//      println(x.isInstanceOf[Map[String,String]])
+//      println("###############")
+//    }
 
-//    sc.objectFile[scala.collection.immutable.HashMap[String,String]]("/es")
-//      .saveToEs(s"cif/indexFeatureToHbaseRowkey",Map("es.mapping.id"->"id"))
+    sc.objectFile[scala.collection.immutable.HashMap[String,String]]("/es_tmp")
+      .saveToEs(s"cif/indexFeatureToHbaseRowkey",Map("es.mapping.id"->"id"))
   }
 
 }

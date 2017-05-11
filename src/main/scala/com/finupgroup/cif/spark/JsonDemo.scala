@@ -46,6 +46,10 @@ object JsonDemo extends App{
             (("winner-id" -> w.id) ~
               ("numbers" -> w.numbers))}))
 
+  val map = Map(1->"1",2->1)
+
+  compact(render("ww"->map.map("dd"->_._1)))
+
   println(compact(render(json)))
 
   println("------------------------------------------------")

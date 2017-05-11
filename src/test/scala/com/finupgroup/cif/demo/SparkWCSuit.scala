@@ -11,7 +11,7 @@ import org.scalatest.FunSuite
   */
 class SparkWCSuit extends FunSuite
   with LocalSparkContext {
-
+  import scala.reflect.runtime.universe._
   //rdd wordCount
   test("test rdd wc") {
     sc.setLogLevel("ERROR")

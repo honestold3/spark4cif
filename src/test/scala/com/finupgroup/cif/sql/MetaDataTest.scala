@@ -1,4 +1,5 @@
 package com.finupgroup.cif.sql
+import org.junit.{Assert, Before, Test}
 
 /**
  * Created by jadetang on 15-3-29.

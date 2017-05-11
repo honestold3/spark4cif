@@ -18,6 +18,7 @@ object SparkDemo {
     val sc = new SparkContext(sparkConf)
 
     val rdd = sc.textFile("/wq/wc.txt")
+
     rdd.flatMap{x => val ss = x.split(" ");ss.map((_,1))}.reduceByKey(_+_).collect.foreach(println)
 
   }

@@ -29,13 +29,32 @@ object SparkDataSource {
         "driver" -> "com.mysql.jdbc.Driver",
         "dbtable" -> "tags",
         "user" -> "root",
-        "password" -> ""
+        "partitionColumn" -> "bookid",
+        //"partitionColumn" -> "(hash(bookid) % 3) as bucket_id",
+        "password" -> "",
+        "lowerBound" -> "1",
+        "upperBound" -> "1000",
+        "numPartitions" ->"5"
       )
     ).load()
     jdbcDF.show()
     println(jdbcDF.count())
     println(jdbcDF.rdd.partitions.size)
 
+
+    println("-----------------------")
+
+    val lowerBound = 1
+    val upperBound = 10000
+    val url = "jdbc://honest:3306/test?user=root&password="
+    val num = 5
+    val p = new Properties
+    p.put("driver","com.mysql.jdbc.Driver")
+    p.put("user","root")
+    p.put("password","")
+//    val df = sqlContext.read.jdbc(url,"test.tags",p)
+//    println(df.count)
+//    println(df.rdd.partitions.size)
 
     println("-----------------------")
 
@@ -57,7 +76,7 @@ object SparkDataSource {
     prop.put("user", "root")
     prop.put("password", "")
 
-    mysqldf.write.mode("append").jdbc("jdbc:mysql://honest:3306/test", "tags", prop)
+    //mysqldf.write.mode("append").jdbc("jdbc:mysql://honest:3306/test", "tags", prop)
 
   }
 

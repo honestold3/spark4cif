@@ -153,7 +153,7 @@ object ParquestDemo {
 
     val df2  = sqlContext.createDataFrame(rowRDD,schema2)
 
-    df2.write.mode(SaveMode.Append)parquet("hdfs://honest:8020/p66")
+    df2.write.mode(SaveMode.Append).parquet("hdfs://honest:8020/p66")
 
     val kankan = sqlContext.read.parquet("hdfs://honest:8020/p66").count()
 

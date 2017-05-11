@@ -25,7 +25,38 @@ object MyParsers extends App with JavaTokenParsers{
 
   def expr3 = repsep(factor,",")
 
+  def expr4 = rep(factor ~ ",?".r)
+
+  def expr5 = rep1sep(factor,",")
+
   def kkkk = factor ^^^ (println("fff"))
+
+  def kankanemp = rep1sep(factor,"")^^{
+
+    case a => {
+      val lb = new scala.collection.mutable.ListBuffer[Any]
+//      val sb = new java.lang.StringBuilder
+//      a.foreach{sb.append(_)}
+//
+//      val k = for{
+//        i<- a
+//        //lb + x.asInstanceOf[String]
+//      } yield {i}
+//      k
+//      sb.toString
+      val kkk = a.map{
+        case x: String =>
+          x.toCharArray
+      }
+      val lens = for(i<-kkk) yield (i.length,kkk)
+      val data = lens.map(_._2).foreach(_.flatten)
+      println("dddd:"+data)
+      val len = lens.map(_._1).reduce(_+_)
+      len
+    }
+
+
+  }
 
 
   val str = """ "asd665" """
@@ -38,6 +69,7 @@ object MyParsers extends App with JavaTokenParsers{
 
   val str4 = "1234"
 
+  val str5 = """  "ddd""ffff"  """
 
   val result = parseAll(Num,str2)
   println(result)
@@ -46,14 +78,24 @@ object MyParsers extends App with JavaTokenParsers{
 
   println(s"kankan: $kankan")
 
-  val kk = parseAll(expr2,str3)
+  val kk = parseAll(expr3,str2)
 
-  println("kk::::"+kk)
+  println("expr2::::"+kk)
+
+  val he = parseAll(expr4,str3)
+
+  println("expr4::::"+he)
 
   val kkk = parseAll(expr0,str4)
   println(kkk)
 
+  val ex5 = parseAll(expr5,str2)
+  println(s"expr5::::$ex5")
+
   val kankan1 = parseAll(kkkk,"1111")
   println(kankan1)
+
+  val empty = parseAll(kankanemp,str5)
+  println(empty)
 
 }

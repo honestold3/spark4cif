@@ -7,38 +7,19 @@ import org.apache.spark.SparkContext._
 import org.apache.spark.sql.SQLContext
 import com.puhui.aes.AesEncryptionUtil
 
-
 /**
-  * Created by wq on 2016/12/23.
+  * Created by wq on 2017/3/21.
   */
-object EsDemo {
+object EsCheck {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
-      //.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-//      .set("es.nodes","honest")
-//      .set("es.port","9200")
-      //.setMaster("spark://honest:7077")
       .set("es.nodes",args(0))
       .set("es.port",args(1))
-      //.set("es.mapping.id", "_id")
-//      .setMaster(args(2))
-      .setAppName("es_spark")
+      .setAppName("es_check")
 
     val sc = new SparkContext(conf)
-    val sqlContext = SQLContext.getOrCreate(sc)
-    import sqlContext.implicits._
-    //查询为abc的数据
-    //val query = """{"query":{"match":{"activity.partnerCode": "abc"}}}"""
 
-    //将在es中的查询结果转化为rdd/dataFrame
-    //val esRdd = sc.esRDD(s"index/type",query)
-    //esRdd.map(xx _ ).saveToEs("index/ss")
-    //直接读入全部数据
-    //val esDf = sqlContext.esDF(s"index/type")
-
-    //val esrdd = sc.esRDD(s"flink-test2/fink_test_data2")
-    //esrdd.collect.foreach(println)
     val map = Map(
       "cfType"->"cfType",
       "channel"->"channel",
@@ -65,40 +46,15 @@ object EsDemo {
       "id5"->"id5",
       "emal"->"emal",
       "cid"->"cid",
-      "encrypt"->"0"
+      "encrypt"->"0",
+      "id"->"123456789"
     )
 
-    val map2 = Map(
-      "cfType"->"cfType",
-      "channel"->"channel",
-      "insertDate"->"insertDate",
-      "className"->"className",
-      "storeid"->"storeid",
-      "taobaoAccount"->"taobaoAccount",
-      "biz"->"biz1"
-       //"id"->"kdieimkkkk"
-    )
-
-    //val map1 = map.map(x=>x._1->(x._2+"1"))
-
-    //val list = List(map,map1)
-    //val list = List(map1)
-    //val input = sc.parallelize(list)
-    //input.saveToEs(s"cif/indexFeatureToHbaseRowkey",Map("es.mapping.id"->"id"))
-    //input.saveToEs(s"cif/indexFeatureToHbaseRowkey")
-
-    val q = """{"query":{"match":{"encrypt": "1"}}}"""
-    val q1 = """{"query":{"match":{"biz": "biz1"}}}"""
-    val q2 = """{"query":{"bool":{"must_not" : {"term" : {"encrypt" : "1"}}}}}"""
-    val q3 = """{"query":{"bool":{"must_not" : {"term" : {"oencrypt" : "nothing"}}}}}"""
-    val rdd = sc.esRDD(s"cif_tmp/indexFeatureToHbaseRowkey",q2)
-
-
-//    println("---------")
-//    println(rdd.collect().length)
-//    rdd.collect().foreach(println)
-//    println("----------")
-
+    val list = List(map)
+    val input = sc.parallelize(list)
+    input.saveToEs(s"cif/indexFeatureToHbaseRowkey",Map("es.mapping.id"->"id"))
+    //
+    val rdd = sc.esRDD(s"cif/indexFeatureToHbaseRowkey")
     val newrdd = rdd.map{x=>
       val key = x._1.toString
       val data = x._2
@@ -139,9 +95,25 @@ object EsDemo {
       esdata + ("id"->key)
     }
 
-    //newrdd.collect.foreach(println)
+    //rdd.collect().foreach(println)
 
-    newrdd.saveAsObjectFile("/es_tmp")
+    //rdd.saveAsObjectFile("/es_data")
+
+    //val hdfsrdd = sc.objectFile[(String,Map[String,String])]("/es_data")
+    //hdfsrdd.collect.foreach(println)
+
+    val acc = sc.accumulator(0,"kkkkk of error")
+    val hdfsrdd =sc.objectFile[scala.collection.immutable.HashMap[String,String]]("/es")
+    //hdfsrdd.collect().foreach(println)
+    hdfsrdd.foreach{x => acc+=1;
+      println(x.get("id"))
+    }
+
+    println("acc::::"+acc.value)
+    //hdfsrdd.saveToEs("cif/indexFeatureToHbaseRowkey",Map("es.mapping.id"->"id"))
+
+
+
 
   }
 

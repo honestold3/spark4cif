@@ -1,5 +1,10 @@
 package com.finupgroup.cif.sql
 
+import com.finupgroup.cif.sql.AST.FieldIdent
+import org.junit.{Assert, Before, Test}
+import com.finupgroup.cif.sql.Engine._
+import com.finupgroup.cif.sql.TestData._
+
 /**
  *
  * @author tangsicheng
