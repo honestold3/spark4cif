@@ -19,6 +19,8 @@ object object2 extends theTrait {
 
 object object3 extends theTrait {
   def theMethod(x: String) = { println("c " + x ) }
+
+  def kankan(i: Int) = i+1
 }
 
 // run static/dynamic reflection methods
@@ -42,13 +44,21 @@ object ReflectionTest extends App{
     val im = m.reflectModule(module)
     val method = im.symbol.typeSignature.member(ru.newTermName("theMethod")).asMethod
 
+    im.symbol.typeSignature.members.filter(_.isMethod).map{x=>x.toString.split(" ")(1)}.foreach(x=> println(s"x=:::$x"))
+
+
+    def methodName: PartialFunction[String, String] = {
+      case x if x.toString().split(" ")(0)== "method" => x
+    }
+
+
     val objMirror = m.reflect(im.instance)
     objMirror.reflectMethod(method)("test1")
 
   }
 
-  dynamicInvocation(1)
-  dynamicInvocation(2)
+  //dynamicInvocation(1)
+  //dynamicInvocation(2)
   dynamicInvocation(3)
 
 }

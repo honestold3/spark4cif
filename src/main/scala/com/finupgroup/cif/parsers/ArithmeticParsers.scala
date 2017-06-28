@@ -74,6 +74,7 @@ object ArithmeticParsers2 extends StandardTokenParsers {
 
   def main(args: Array[String]) {
     val str = "(1+2)+(2*3+7)"
+    //val str = "(1+2)"
     val parse = phrase(expr)
     val tokens = new lexical.Scanner(str)
     println(str)

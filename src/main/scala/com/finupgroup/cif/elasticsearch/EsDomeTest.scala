@@ -7,7 +7,7 @@ import com.puhui.aes.AesEncryptionUtil
   */
 object EsDomeTest extends App{
 
-  val en = AesEncryptionUtil.encrypt("ASC")
+  val en = AesEncryptionUtil.encrypt("AAA")
 
   println(s"en:$en")
 
